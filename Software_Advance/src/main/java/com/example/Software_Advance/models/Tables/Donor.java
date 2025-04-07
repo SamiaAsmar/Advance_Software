@@ -22,7 +22,6 @@ public class Donor {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
-
     @NotBlank(message = "Donation type is required")
     @Column(name = "donation_type", nullable = false)
     private String donationType;
