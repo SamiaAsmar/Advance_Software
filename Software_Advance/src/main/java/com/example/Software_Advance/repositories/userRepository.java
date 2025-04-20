@@ -1,8 +1,8 @@
 package com.example.Software_Advance.repositories;
 
 import com.example.Software_Advance.models.Tables.User;
-import com.example.Software_Advance.models.Enums.UserRole;
-import com.example.Software_Advance.models.Enums.UserType;
+import com.example.Software_Advance.models.Enums.userRole;
+import com.example.Software_Advance.models.Enums.userType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,9 +14,9 @@ public interface userRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
-    List<User> findByRole(UserRole role);
+    List<User> findByRole(userRole role);
 
-    List<User> findByType(UserType type);
+    List<User> findByType(userType type);
 
-   boolean existsByEmail(String email) ;
+    boolean existsByEmail(String email) ;
 }

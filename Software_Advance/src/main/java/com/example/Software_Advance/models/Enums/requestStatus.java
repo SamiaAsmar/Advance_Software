@@ -1,8 +1,8 @@
 package com.example.Software_Advance.models.Enums;
 
-public enum HelpRequestStatus {
-    OPEN,
-    MATCHED,
+public enum requestStatus {
+    PENDING,
+    IN_PROGRESS,
     COMPLETED,
     CANCELLED
 }

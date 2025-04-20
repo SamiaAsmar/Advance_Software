@@ -1,6 +1,6 @@
 package com.example.Software_Advance.models.Enums;
 
-public enum ShipmentStatus {
+public enum shipmentStatus {
     DISPATCHED,
     IN_TRANSIT,
     DELIVERED,

@@ -1,6 +1,7 @@
-/*package com.example.Software_Advance.repositories;
+package com.example.Software_Advance.repositories;
 
 import com.example.Software_Advance.models.Tables.Orphanage;
+import com.example.Software_Advance.models.Tables.Sponsor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface orphanageRepository extends JpaRepository<Orphanage, Long> {
 
-    Optional<Orphanage> findById(Long id);
+    Optional<Orphanage> findByUserId(Long userId);
 
     List<Orphanage> findByVerified(boolean verified);
 
@@ -19,4 +20,4 @@ public interface orphanageRepository extends JpaRepository<Orphanage, Long> {
    // List<Orphanage> findByCurrentOrphansGreaterThan(int currentOrphans);
 
 
-}*/
+}

@@ -1,4 +1,4 @@
-/*package com.example.Software_Advance.repositories;
+package com.example.Software_Advance.repositories;
 
 import com.example.Software_Advance.models.Tables.Volunteer;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,5 +18,5 @@ public interface volunteerRepository extends JpaRepository<Volunteer, Long> {
 
     List<Volunteer> findByAvailability(String availability);
 
-    Optional<Volunteer> findById(Long id);
-}*/
+    Optional<Volunteer> findByUserId(Long userId);
+}

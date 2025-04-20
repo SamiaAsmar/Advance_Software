@@ -1,8 +1,9 @@
 package com.example.Software_Advance.controller;
 import ch.qos.logback.classic.Logger;
+import com.example.Software_Advance.DTO.CreateUserRequestDTO;
 import com.example.Software_Advance.models.Tables.User;
 
-import com.example.Software_Advance.services.UserService;
+import com.example.Software_Advance.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +14,17 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserController {
+public class userController {
 
 
     @Autowired
-    private UserService userService;
+    private userService userService;
     Logger log;
 
 
     @PostMapping("/create")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User savedUser = userService.saveUser(user);
+    public ResponseEntity<User> createUser(@RequestBody CreateUserRequestDTO requestDTO) {
+        User savedUser = userService.saveUser(requestDTO);
         return ResponseEntity.ok(savedUser);
     }
 
@@ -39,7 +40,7 @@ public class UserController {
 
 
 
-   @GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         Optional<User> user = userService.getUserById(id);
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
