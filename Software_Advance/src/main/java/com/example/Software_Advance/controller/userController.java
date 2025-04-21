@@ -15,8 +15,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/users")
 public class userController {
-
-
     @Autowired
     private userService userService;
     Logger log;

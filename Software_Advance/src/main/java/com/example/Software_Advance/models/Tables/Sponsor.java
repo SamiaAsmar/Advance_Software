@@ -17,10 +17,11 @@ public class Sponsor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JsonBackReference
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
+
 
 
     @NotBlank(message = "Sponsorship type is required")

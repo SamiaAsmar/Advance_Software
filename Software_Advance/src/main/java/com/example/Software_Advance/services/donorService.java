@@ -16,9 +16,6 @@ public class donorService {
 
 
 //    public Donor saveDonor(donorDTO donor) {
-//        Donor Donor = new Donor();
-//
-//
 //    }
 
 
