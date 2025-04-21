@@ -1,5 +1,5 @@
 package com.example.Software_Advance.services;
-
+import com.example.Software_Advance.DTO.*;
 import com.example.Software_Advance.models.Tables.Donor;
 import com.example.Software_Advance.repositories.donorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,11 @@ public class donorService {
     private donorRepository donorRepository;
 
 
-    public Donor saveDonor(Donor donor) {
-        return donorRepository.save(donor);
-    }
+//    public Donor saveDonor(donorDTO donor) {
+//        Donor Donor = new Donor();
+//
+//
+//    }
 
 
     public List<Donor> getAllDonors() {
