@@ -78,6 +78,7 @@ public class User {
     @JsonManagedReference
     private Organization organization;
 
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = true,fetch = FetchType.EAGER)
     @JsonManagedReference
     private Orphanage orphanage;

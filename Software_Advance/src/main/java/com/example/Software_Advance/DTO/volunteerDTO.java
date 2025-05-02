@@ -6,12 +6,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-@Getter
+
 @Setter
+@Getter
 public class volunteerDTO {
     private userDTO user;
     private Long organizationId;
     private String skills;
     private Availability availability;
     private String status;
+
 }
+

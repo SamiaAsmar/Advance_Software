@@ -14,5 +14,15 @@ public class donationDTO {
     private Long organizationId;
     private paymentType paymentType;
     private Double donationAmount;
-}
+    public donationDTO(donationType donationType, Double donationAmount) {
+        this.donationType = donationType;
+        this.donationAmount = donationAmount;
+    }
+    public donationDTO(donationType donationType, Double donationAmount, Long organizationId, paymentType paymentType) {
+        this.donationType = donationType;
+        this.donationAmount = donationAmount;
+        this.organizationId = organizationId;
+        this.paymentType = paymentType;
+    }
 
+}

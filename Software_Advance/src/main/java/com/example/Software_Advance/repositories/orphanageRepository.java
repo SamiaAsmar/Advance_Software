@@ -17,7 +17,7 @@ public interface orphanageRepository extends JpaRepository<Orphanage, Long> {
 
     List<Orphanage> findByCapacityGreaterThan(int capacity);
 
-   // List<Orphanage> findByCurrentOrphansGreaterThan(int currentOrphans);
+    // List<Orphanage> findByCurrentOrphansGreaterThan(int currentOrphans);
 
 
 }

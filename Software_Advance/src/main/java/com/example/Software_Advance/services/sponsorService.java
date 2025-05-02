@@ -1,5 +1,6 @@
 package com.example.Software_Advance.services;
 
+import com.example.Software_Advance.models.Enums.sponsorshipType;
 import com.example.Software_Advance.models.Tables.Sponsor;
 import com.example.Software_Advance.repositories.sponsorRepository;
 import jakarta.transaction.Transactional;
@@ -34,13 +35,30 @@ public class sponsorService {
     public Sponsor updateSponsor(Long id, Sponsor updatedSponsor) {
         return sponsorRepository.findById(id)
                 .map(existingSponsor -> {
-                    existingSponsor.setSponsorshipType(updatedSponsor.getSponsorshipType());
-                    existingSponsor.setStartDate(updatedSponsor.getStartDate());
-                    existingSponsor.setStatus(updatedSponsor.getStatus());
+                    if (updatedSponsor.getSponsorshipType() != null) {
+                        try {
+                            sponsorshipType sponsorshipType = updatedSponsor.getSponsorshipType();
+                            existingSponsor.setSponsorshipType(sponsorshipType);
+                        } catch (IllegalArgumentException e) {
+                            throw new RuntimeException("Invalid SponsorshipType value: " + updatedSponsor.getSponsorshipType());
+                        }
+                    }
+
+                    if (updatedSponsor.getStatus() != null) {
+                        existingSponsor.setStatus(updatedSponsor.getStatus());
+                    }
+
+                    if (updatedSponsor.getStartDate() != null) {
+                        existingSponsor.setStartDate(updatedSponsor.getStartDate());
+                    }
+
                     return sponsorRepository.save(existingSponsor);
                 })
                 .orElseThrow(() -> new RuntimeException("Sponsor not found with id: " + id));
     }
+
+
+
 
     @Transactional
     public void deleteSponsor(Long id) {
