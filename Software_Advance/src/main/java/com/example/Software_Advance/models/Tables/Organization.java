@@ -1,6 +1,6 @@
  package com.example.Software_Advance.models.Tables;
 
-import com.example.Software_Advance.models.Enums.ServiceType;
+import com.example.Software_Advance.models.Enums.serviceType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
             import jakarta.validation.constraints.NotBlank;
@@ -25,5 +25,5 @@ import lombok.*;
         @NotBlank(message = "Service type is required")
         @Column(nullable = false)
         @Enumerated(EnumType.STRING)
-        private ServiceType serviceType;
+        private serviceType serviceType;
     }

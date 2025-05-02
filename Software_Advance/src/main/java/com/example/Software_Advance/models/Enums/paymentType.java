@@ -1,6 +1,6 @@
 package com.example.Software_Advance.models.Enums;
 
-public enum PaymentType {
+public enum paymentType {
     CASH,
     CREDIT_CARD,
     E_WALLET,

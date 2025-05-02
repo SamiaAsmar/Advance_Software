@@ -1,6 +1,6 @@
 package com.example.Software_Advance.models.Tables;
 
-import com.example.Software_Advance.models.Enums.SupportType;
+import com.example.Software_Advance.models.Enums.supportType;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,5 +21,5 @@ public class OrphanageOrganization {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private SupportType supportType;
+    private supportType supportType;
 }

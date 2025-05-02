@@ -1,6 +1,6 @@
 package com.example.Software_Advance.models.Enums;
 
-public enum VerificationStatus {
+public enum verificationStatus {
     PENDING,
     VERIFIED,
     REJECTED

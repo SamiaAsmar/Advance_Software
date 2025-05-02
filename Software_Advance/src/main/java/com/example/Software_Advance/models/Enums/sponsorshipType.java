@@ -1,6 +1,6 @@
 package com.example.Software_Advance.models.Enums;
 
-public enum SponsorshipType {
+public enum sponsorshipType {
 
     FULL_SPONSORSHIP,         // كفالة كاملة تشمل جميع الاحتياجات
     PARTIAL_SPONSORSHIP,      // كفالة جزئية تغطي بعض الاحتياجات الأساسية

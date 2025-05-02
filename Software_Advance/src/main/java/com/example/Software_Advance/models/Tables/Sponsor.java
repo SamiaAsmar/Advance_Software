@@ -1,6 +1,5 @@
 package com.example.Software_Advance.models.Tables;
-import com.example.Software_Advance.models.Enums.SponsorshipType;
-import com.example.Software_Advance.models.Enums.UserRole;
+import com.example.Software_Advance.models.Enums.sponsorshipType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -27,7 +26,7 @@ public class Sponsor {
     @NotBlank(message = "Sponsorship type is required")
     @Enumerated(EnumType.STRING)
     @Column(name = "sponsorship_type", nullable = false)
-    private SponsorshipType sponsorshipType;
+    private sponsorshipType sponsorshipType;
 
 
     @Column(name = "start_date", nullable = false)

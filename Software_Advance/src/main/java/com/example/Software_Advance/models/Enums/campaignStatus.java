@@ -1,6 +1,6 @@
 package com.example.Software_Advance.models.Enums;
 
-public enum CampaignStatus {
+public enum campaignStatus {
 
 
         ACTIVE,
