@@ -2,14 +2,11 @@ package com.example.Software_Advance.services;
 
 import ch.qos.logback.classic.Logger;
 import com.example.Software_Advance.DTO.*;
-import com.example.Software_Advance.models.Enums.sponsorshipType;
-import com.example.Software_Advance.models.Enums.userType;
 import com.example.Software_Advance.models.Tables.*;
 import com.example.Software_Advance.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,7 +92,7 @@ public class userService {
                sponsorRepository.save(sponsor);
             }
 
-           /* case VOLUNTEER -> {
+            case VOLUNTEER -> {
                 volunteerDTO volunteerDTO = requestDTO.getVolunteer();
                 Volunteer volunteer = new Volunteer();
                 volunteer.setUser(savedUser);
@@ -104,7 +101,7 @@ public class userService {
                 volunteer.setAvailability(volunteerDTO.getAvailability());
                 volunteer.setStatus(volunteerDTO.getStatus());
                 volunteerRepository.save(volunteer);
-            }*/
+            }
 
           /*  case ORGANIZATION -> {
                 organizationDTO organizationDTO = requestDTO.getOrganization();

@@ -22,7 +22,7 @@ public class Donor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JsonBackReference
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
