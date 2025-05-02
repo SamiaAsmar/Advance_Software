@@ -1,14 +1,10 @@
 package com.example.Software_Advance.models.Tables;
 
-import com.example.Software_Advance.models.Tables.Donor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
-
 import com.example.Software_Advance.models.Enums.*;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -22,15 +18,16 @@ public class Donation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Donation type is required")
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Donation type is required")
     @Column(name = "donation_type", nullable = false)
     private donationType donationType;
 
     @Column(name = "organization_id", nullable = true)
     private Long organizationId;
 
-    @NotBlank(message = "Payment type is required")
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Payment type is required")
     @Column(name = "payment_type", nullable = false)
     private paymentType paymentType;
 
