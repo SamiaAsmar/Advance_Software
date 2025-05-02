@@ -2,11 +2,16 @@ package com.example.Software_Advance.services;
 
 import ch.qos.logback.classic.Logger;
 import com.example.Software_Advance.DTO.*;
+import com.example.Software_Advance.models.Enums.sponsorshipType;
+import com.example.Software_Advance.models.Enums.userRole;
+import com.example.Software_Advance.models.Enums.userType;
 import com.example.Software_Advance.models.Tables.*;
 import com.example.Software_Advance.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +38,6 @@ public class userService {
 
     @Autowired
     private orphanageRepository orphanageRepository;
-
 
 
     public User saveUser(CreateUserRequestDTO requestDTO) {
@@ -100,26 +104,31 @@ public class userService {
                 volunteer.setSkills(volunteerDTO.getSkills());
                 volunteer.setAvailability(volunteerDTO.getAvailability());
                 volunteer.setStatus(volunteerDTO.getStatus());
+
+                savedUser.setVolunteer(volunteer);
                 volunteerRepository.save(volunteer);
             }
-
-          /*  case ORGANIZATION -> {
+              case ORGANIZATION -> {
                 organizationDTO organizationDTO = requestDTO.getOrganization();
                 Organization organization = new Organization();
                 organization.setUser(savedUser);
                 organization.setServiceType(organizationDTO.getServiceType());
-                organizationRepository.save(organization);
-            }*/
 
-           /* case ORPHANAGE -> {
+                  savedUser.setOrganization(organization);
+                  organizationRepository.save(organization);
+            }
+
+            case ORPHANAGE -> {
                 orphanageDTO orphanageDTO = requestDTO.getOrphanage();
                 Orphanage orphanage = new Orphanage();
                 orphanage.setUser(savedUser);
                 orphanage.setCapacity(orphanageDTO.getCapacity());
                 orphanage.setOrphanCount(orphanageDTO.getOrphanCount());
                 orphanage.setVerified(orphanageDTO.isVerified());
+
+                savedUser.setOrphanage(orphanage);
                 orphanageRepository.save(orphanage);
-            }*/
+            }
 
             default -> log.warn("Unknown user type: {}", userDTO.getType());
         }
@@ -141,12 +150,19 @@ public class userService {
         return userRepository.existsByEmail(email);
     }
 
+    public List<User> getUserByName(String name){
+        return userRepository.findByName(name);
+    }
+
+    public List<User> getUserByType(userType type)
+    {
+        return userRepository.findByType(type);
+    }
+
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
-            log.warn(">>> User not found with ID: " + id);
             return;
         }
         userRepository.deleteById(id);
-        //log.info(">>> User with ID {} deleted.", id);
     }
 }
