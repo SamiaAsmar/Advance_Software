@@ -1,6 +1,6 @@
 package com.example.Software_Advance.models.Enums;
 
-public enum DonationType {
+public enum donationType {
     CLOTHES,
     FOOD,
     MEDICAL_SUPPLIES,

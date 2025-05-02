@@ -9,8 +9,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
-import javax.net.ssl.SSLEngineResult;
-
 @Entity
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = "email") })
 @Getter @Setter
@@ -53,13 +51,13 @@ public class User {
     @NotBlank(message = "User type is required")
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable =true)
-    private UserType type;
+    private userType type;
 
 
     @NotBlank(message = "User role is required")
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
-    private UserRole role;
+    private userRole role;
 
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = true,fetch = FetchType.EAGER)
@@ -76,12 +74,12 @@ public class User {
     @JsonManagedReference
     private Volunteer volunteer;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = true,fetch = FetchType.EAGER)
     @JsonManagedReference
     private Organization organization;
 
-    @JsonIgnore
+//    @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = true,fetch = FetchType.EAGER)
     @JsonManagedReference
     private Orphanage orphanage;

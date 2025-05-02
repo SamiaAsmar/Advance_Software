@@ -1,7 +1,7 @@
 package com.example.Software_Advance.services;
 
 import com.example.Software_Advance.models.Tables.Sponsor;
-import com.example.Software_Advance.repositories.SponsorRepository;
+import com.example.Software_Advance.repositories.sponsorRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,9 +11,9 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class SponsorService {
+public class sponsorService {
 
-    private final SponsorRepository sponsorRepository;
+    private final sponsorRepository sponsorRepository;
 
     public List<Sponsor> getAllSponsors() {
         return sponsorRepository.findAll();
