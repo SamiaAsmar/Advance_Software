@@ -7,6 +7,8 @@ import lombok.Setter;
 
 @Getter @Setter
 @Data
+@Getter
+@Setter
 public class orphanageDTO {
     private userDTO user;
     private int orphanCount;
