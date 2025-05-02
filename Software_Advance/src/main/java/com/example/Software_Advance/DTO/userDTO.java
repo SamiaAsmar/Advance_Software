@@ -4,8 +4,12 @@ import com.example.Software_Advance.models.Enums.userRole;
 import com.example.Software_Advance.models.Enums.userType;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
+@Getter
+@Setter
 public class userDTO {
     private String name;
     private String password;
