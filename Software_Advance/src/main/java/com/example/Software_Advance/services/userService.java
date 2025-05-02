@@ -3,17 +3,20 @@ package com.example.Software_Advance.services;
 import ch.qos.logback.classic.Logger;
 import com.example.Software_Advance.DTO.*;
 import com.example.Software_Advance.models.Enums.sponsorshipType;
+import com.example.Software_Advance.models.Enums.userRole;
 import com.example.Software_Advance.models.Enums.userType;
 import com.example.Software_Advance.models.Tables.*;
 import com.example.Software_Advance.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class userService {
 
     Logger log;
@@ -36,39 +39,6 @@ public class userService {
     @Autowired
     private orphanageRepository orphanageRepository;
 
-    /*public User saveUser(User user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
-            log.warn("User with email {} already exists.", user.getEmail());
-            return null;
-        }
-
-        User savedUser = userRepository.save(user);
-        userType type = user.getType();
-
-        switch (type) {
-            case DONOR:
-                Donor donor = new Donor();
-                donor.setUser(savedUser);
-               //donor.setDonationType("DEFAULT");
-               // donor.setPaymentType(PaymentType.CASH);
-                donorRepository.save(donor);
-                break;
-
-            case SPONSOR:
-                Sponsor sponsor = new Sponsor();
-                sponsor.setUser(savedUser);
-                sponsor.setSponsorshipType(sponsorshipType.valueOf("FULL_SPONSORSHIP"));
-                sponsor.setStartDate(LocalDate.now());
-                sponsor.setStatus("ACTIVE");
-                sponsorRepository.save(sponsor);
-                break;
-
-            default:
-                break;
-        }
-
-        return savedUser;
-    }*/
 
     public User saveUser(CreateUserRequestDTO requestDTO) {
         userDTO userDTO = requestDTO.getUser();
@@ -114,19 +84,19 @@ public class userService {
                 donorRepository.save(donor);
             }
 
-//           case SPONSOR -> {
-//                sponsorDTO sponsorDTO = requestDTO.getSponsor();
-//                Sponsor sponsor = new Sponsor();
-//                sponsor.setUser(savedUser);
-//                sponsor.setSponsorshipType(sponsorDTO.getSponsorshipType());
-//                sponsor.setStartDate(sponsorDTO.getStartDate());
-//                sponsor.setStatus(sponsorDTO.getStatus());
-//               savedUser.setSponsor(sponsor);
-//
-//               sponsorRepository.save(sponsor);
-//            }
+           case SPONSOR -> {
+                sponsorDTO sponsorDTO = requestDTO.getSponsor();
+                Sponsor sponsor = new Sponsor();
+                sponsor.setUser(savedUser);
+                sponsor.setSponsorshipType(sponsorDTO.getSponsorshipType());
+                sponsor.setStartDate(sponsorDTO.getStartDate());
+                sponsor.setStatus(sponsorDTO.getStatus());
 
-           case VOLUNTEER -> {
+               savedUser.setSponsor(sponsor);
+               sponsorRepository.save(sponsor);
+            }
+
+            case VOLUNTEER -> {
                 volunteerDTO volunteerDTO = requestDTO.getVolunteer();
                 Volunteer volunteer = new Volunteer();
                 volunteer.setUser(savedUser);
@@ -134,19 +104,18 @@ public class userService {
                 volunteer.setSkills(volunteerDTO.getSkills());
                 volunteer.setAvailability(volunteerDTO.getAvailability());
                 volunteer.setStatus(volunteerDTO.getStatus());
-               savedUser.setVolunteer(volunteer);
 
-               volunteerRepository.save(volunteer);
+                savedUser.setVolunteer(volunteer);
+                volunteerRepository.save(volunteer);
             }
-
-            case ORGANIZATION -> {
+              case ORGANIZATION -> {
                 organizationDTO organizationDTO = requestDTO.getOrganization();
                 Organization organization = new Organization();
                 organization.setUser(savedUser);
                 organization.setServiceType(organizationDTO.getServiceType());
-                savedUser.setOrganization(organization);
 
-                organizationRepository.save(organization);
+                  savedUser.setOrganization(organization);
+                  organizationRepository.save(organization);
             }
 
             case ORPHANAGE -> {
@@ -158,7 +127,6 @@ public class userService {
                 orphanage.setVerified(orphanageDTO.isVerified());
 
                 savedUser.setOrphanage(orphanage);
-
                 orphanageRepository.save(orphanage);
             }
 
@@ -182,12 +150,19 @@ public class userService {
         return userRepository.existsByEmail(email);
     }
 
+    public List<User> getUserByName(String name){
+        return userRepository.findByName(name);
+    }
+
+    public List<User> getUserByType(userType type)
+    {
+        return userRepository.findByType(type);
+    }
+
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
-            log.warn(">>> User not found with ID: " + id);
             return;
         }
         userRepository.deleteById(id);
-        //log.info(">>> User with ID {} deleted.", id);
     }
 }

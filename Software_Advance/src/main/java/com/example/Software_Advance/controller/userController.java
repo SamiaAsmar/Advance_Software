@@ -1,6 +1,7 @@
 package com.example.Software_Advance.controller;
 import ch.qos.logback.classic.Logger;
 import com.example.Software_Advance.DTO.CreateUserRequestDTO;
+import com.example.Software_Advance.models.Enums.userType;
 import com.example.Software_Advance.models.Tables.User;
 
 import com.example.Software_Advance.services.*;
@@ -38,20 +39,51 @@ public class userController {
         return ResponseEntity.ok(users);
     }
 
-
-
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        Optional<User> user = userService.getUserById(id);
-        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping("/by-name/{name}")
+    public ResponseEntity<?> getUserByName(@PathVariable String name) {
+        List<User> users = userService.getUserByName(name);
+        if (users.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("There are no users with this name "+ name+ ".");        }
+        return ResponseEntity.ok(users);
     }
 
+
+    @GetMapping("/by-type/{type}")
+    public ResponseEntity<?> getUserByType(@PathVariable userType type){
+        List <User> users =userService.getUserByType(type);
+        if(users.isEmpty())
+        {return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("There are no users with this Type "+ type+ ".");
+        }
+        return ResponseEntity.ok(users);
+    }
+
+
+    @GetMapping("/by-id/{id}")
+    public ResponseEntity<String> getUserById(@PathVariable Long id) {
+        Optional<User> user = userService.getUserById(id);
+        if(user.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("User with ID " + id+ " was not found.");
+        }
+        else{
+            return ResponseEntity.ok(user.get().toString());       }
+    }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        Optional<User> userOptional = userService.getUserById(id);
+        if (userOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("User with ID " + id + " was not found.");
+        }
         userService.deleteUser(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("User with ID " + id + " has been successfully deleted.");
     }
+
+
+
 
 }
