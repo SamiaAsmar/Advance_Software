@@ -14,4 +14,3 @@ public class orphanageDTO {
         private int capacity;
 
 }
-

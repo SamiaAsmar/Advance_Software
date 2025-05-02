@@ -74,15 +74,15 @@ public class User {
     @JsonManagedReference
     private Volunteer volunteer;
 
-//   @JsonIgnore
-   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = true,fetch = FetchType.EAGER)
-   @JsonManagedReference
-   private Organization organization;
-
-  // @JsonIgnore
+//    @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = true,fetch = FetchType.EAGER)
     @JsonManagedReference
-   private Orphanage orphanage;
+    private Organization organization;
+
+//    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, optional = true,fetch = FetchType.EAGER)
+    @JsonManagedReference
+    private Orphanage orphanage;
 
 
 }
